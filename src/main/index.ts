@@ -10,6 +10,10 @@ function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
+    // ponytail: hidden titlebar only draws native traffic lights on mac; win/linux get no frame
+    // controls yet (frameless, no custom min/max/close) — add those before shipping cross-platform.
+    titleBarStyle: 'hidden',
+    ...(process.platform === 'darwin' ? { trafficLightPosition: { x: 16, y: 16 } } : {}),
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
